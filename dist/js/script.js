@@ -62,8 +62,8 @@
       thisProduct.renderInMenu();
       thisProduct.getElements();
       thisProduct.initAccordion();
-      //thisProduct.initOrderForm();
-      //thisProduct.processOrder();
+      thisProduct.initOrderForm();
+      thisProduct.processOrder();
 
       console.log('new Product:', thisProduct);
     };
@@ -91,7 +91,7 @@
       console.log('cartButton', thisProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
       console.log('priceElem', thisProduct.priceElem);
-    };
+    }
 
     renderInMenu(){
       const thisProduct = this;
@@ -107,7 +107,6 @@
 
     initOrderForm(){
       const thisProduct = this;
-      console.log('initOrderForm:', initOrderForm);
 
       thisProduct.form.addEventListener('submit', function(event){
         event.preventDefault();
@@ -128,7 +127,6 @@
 
     processOrder(){
       const thisProduct = this;
-      console.log('processOrder:', processOrder);
 
       // convert form to object structure
       const formData = utils.serializeFormToObject(thisProduct.form);
@@ -152,13 +150,13 @@
           // check if there is param with a name of paramId in formData and if it includes optionId
           if(formData[paramId] && formData[paramId].includes(optionId)) {
             // check if the option is not default
-            if(option !== option.default) {
+            if(!option.default) {
               // add option price to price variable
               price += option.price;
             }
           } else {
             // check if the option is default
-            if(option == option.default) {
+            if(option.default) {
               // reduce price variable
               price -= option.price;
             }
@@ -166,6 +164,7 @@
         }
       // update calculated price in the HTML
       thisProduct.priceElem.innerHTML = price;
+
       };
     };
   }
