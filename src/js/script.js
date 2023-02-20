@@ -160,8 +160,8 @@
           const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
 
           if(optionSelected) {
-              if(optionImage) {
-                optionImage.classList.add(classNames.menuProduct.imageVisible);
+            if(optionImage) {
+              optionImage.classList.add(classNames.menuProduct.imageVisible);
             };
             if(!option.default) {
               price += option.price;
@@ -175,9 +175,9 @@
                 };
               }
         };
+      };
         price *= thisProduct.amountWidget.value;
         thisProduct.priceElem.innerHTML = price;
-      };
     };
   };
 
@@ -191,7 +191,6 @@
       thisWidget.getElements(element);
       thisWidget.setValue(settings.amountWidget.defaultValue);
       thisWidget.initActions();
-      thisWidget.announce();
     };
     getElements(element){
       const thisWidget = this;
@@ -205,9 +204,10 @@
     const newValue = parseInt(value);
       if(thisWidget.value !== newValue && !isNaN(newValue) && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax) {
         thisWidget.value = newValue;
+        thisWidget.announce();
       };
-    thisWidget.announce();
     thisWidget.input.value = thisWidget.value;
+    
     };
     initActions(){
       const thisWidget = this;
