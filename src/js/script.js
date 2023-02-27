@@ -318,6 +318,8 @@
       thisCart.dom = {};
       thisCart.dom.wrapper = element;
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
+      thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
+      console.log('productList', thisCart.dom.productList);
     }
     initActions(){
       const thisCart = this;
@@ -328,6 +330,10 @@
     add(menuProduct){
       const thisCart = this;
       console.log('adding product', menuProduct);
+      const generatedHTML = templates.cartProduct(menuProduct);
+      const generatedDOM = utils.createDOMFromHTML(generatedHTML);
+      console.log('generatedDOM', generatedDOM);
+      thisCart.dom.productList.appendChild(generatedDOM);
     }
   }
 
