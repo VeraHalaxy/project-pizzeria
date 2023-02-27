@@ -203,8 +203,8 @@
               }
         };
       };
-        price *= thisProduct.amountWidget.value;
         thisProduct.priceSingle = price;
+        price *= thisProduct.amountWidget.value;
         thisProduct.priceElem.innerHTML = price;
     };
 
@@ -334,6 +334,8 @@
       const generatedDOM = utils.createDOMFromHTML(generatedHTML);
       console.log('generatedDOM', generatedDOM);
       thisCart.dom.productList.appendChild(generatedDOM);
+      thisCart.products.push(menuProduct);
+      console.log('thisCart.products', thisCart.products);
     }
   }
 
