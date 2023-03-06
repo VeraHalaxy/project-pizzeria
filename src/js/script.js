@@ -340,8 +340,6 @@
 
       thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
       console.log('thisCart.products', thisCart.products);
-      
-      thisCart.cartProduct = new CartProduct();
     }
   }
 
@@ -351,10 +349,11 @@
       console.log('thisCartProduct', thisCartProduct);
 
       thisCartProduct.getElements(element);
+      thisCartProduct.initAmountWidget(menuProduct);
 
       thisCartProduct.id = menuProduct.id;
-      thisCartProduct.name = menuProduct.data.name;
-      thisCartProduct.amountWidget = menuProduct.amountWidget.value;
+      thisCartProduct.name = menuProduct.name;
+      thisCartProduct.amount = menuProduct.amount;
       thisCartProduct.price = menuProduct.price;
     }
     getElements(element){
@@ -367,6 +366,16 @@
       thisCartProduct.dom.edit = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.edit);
       thisCartProduct.dom.remove = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.remove);
     }
+    initAmountWidget(menuProduct){
+      const thisCartProduct = this;
+
+      thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
+      thisCartProduct.dom.amountWidget.addEventListener('updated', function(){
+        thisCartProduct.amount = menuProduct.amount;
+        thisCartProduct.price = menuProduct.priceSingle * menuProduct.amount;
+        thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
+      });
+    };
   }
 
   const app = {
